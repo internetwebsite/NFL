@@ -1,232 +1,252 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFL Scores 2024 - Latest Weekly NFL Results</title>
-    <meta name="description" content="Stay updated with the latest NFL scores for the 2024 season. This page provides weekly NFL results, including all regular-season games from Week 1 to Week 18 and the playoffs.">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* General Styles */
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>NFL Scores - 2024 Season</title> 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"> 
+  <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
-
-        /* Header Styles */
         header {
-            background-color: #003e7e;
-            color: #ffffff;
-            text-align: center;
+            background-color: #0000FF;
             padding: 20px;
-            position: relative;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        header p {
-            margin: 10px 0 0;
-        }
-
-        .header-image {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            width: 70px; /* Adjusted size */
-            height: auto;
-        }
-
-        /* Navigation Line Styles */
-        .nav-line {
-            background-color: #004c8c;
-            height: 10px;
-        }
-
-        /* Main Content Styles */
-        main {
-            display: flex;
-            padding: 20px;
-            flex: 1;
-        }
-
-        .content {
-            flex: 2;
-        }
-
-        .sidebar {
-            flex: 1.5; /* Increased flex value */
-            margin-left: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .week-links {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 columns */
-            gap: 10px;
-            max-width: calc(100% - 320px); /* Adjust for increased sidebar width */
-        }
-
-        .week-links .week {
-            background-color: #003e7e; /* Darker button color */
-            color: #ffffff;
-            padding: 10px; /* Reduced padding */
-            border: 2px solid #ffffff;
             text-align: center;
-            height: 120px; /* Reduced height */
-            line-height: 40px;
-            font-size: 24px; /* Font size */
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 10px; /* Rounded corners */
-            transition: background-color 0.3s, color 0.3s, transform 0.3s;
-            box-sizing: border-box; /* Include border in width calculation */
         }
-
-        .week-links .week:hover {
-            background-color: #ff6600; /* Orange color on hover */
-            color: #ffffff;
-            transform: scale(1.05); /* Slightly enlarges button */
-        }
-
-        .week-info {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .week-info.active {
-            display: block;
-        }
-
-        .week-info p {
-            margin: 0 0 10px;
-        }
-
-        .week-info h3 {
-            margin-top: 0;
-        }
-
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #003e7e;
-            color: #ffffff;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        /* Social Media Icons */
-        .social-media {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-media a {
-            color: #003e7e;
-            font-size: 24px;
+        header h1 a {
+            color: white;
             text-decoration: none;
+            font-size: 3em;
         }
-
-        .social-media a:hover {
-            color: #ff6600;
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #333;
         }
-
-        /* AdSense */
-        .ad-container {
-            width: 100%;
+        .subtitle-small {
+            text-align: center;
+            font-size: 1.5em;
+            color: white;
+            margin-top: -10px;
+        }
+        .weeks-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            border: 2px solid #0000FF;
+            padding: 15px;
+            border-radius: 15px;
+            background-color: #ffffff;
+        }
+        .week-box {
+            background-color: #0000FF;
+            color: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 80px;
+            text-align: center;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .week-box:hover {
+            background-color: #FF4500;
+            transform: scale(1.1);
+        }
+        .hidden-results {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .hidden-results.show {
+            display: block;
+            opacity: 1;
+        }
+        .game-summary {
+            margin-bottom: 20px;
+        }
+        .game-summary h3 {
+            color: #333;
+        }
+        .game-summary p {
+            font-size: 1em;
+            color: #555;
+        }
+        .back-to-top {
+            text-align: center;
             margin-top: 20px;
         }
-
-        .ad-container iframe {
-            width: 100%;
-            height: auto;
-            max-width: 300px; /* Adjust based on ad size */
-            border: none;
+        .back-to-top a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: white;
+            color: #0000FF;
+            border: 2px solid #0000FF;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
-    </style>
-    <script>
-        function toggleWeekInfo(week) {
-            const info = document.querySelector(`.week-info[data-week="${week}"]`);
-            const allInfos = document.querySelectorAll('.week-info');
-            allInfos.forEach(info => info.classList.remove('active'));
-            info.classList.add('active');
+        .back-to-top a:hover {
+            background-color: #0000FF;
+            color: white;
         }
-    </script>
-</head>
-<body>
-    <header>
-        <img src="football-image.jpg" alt="Football Image" class="header-image">
-        <h1>NFL Scores 2024</h1>
-        <p>Stay updated with the latest NFL scores for the 2024 season. Check weekly results and keep track of your favorite teams' performance.</p>
-    </header>
-    <div class="nav-line"></div>
-    <main>
-        <div class="content">
-            <section id="home">
-                <h2>Welcome to NFL Scores 2024</h2>
-                <div id="weekly-scores" class="week-links">
-                    <!-- Week Buttons -->
-                    <div class="week" onclick="toggleWeekInfo('week1')">Week 1</div>
-                    <div class="week" onclick="toggleWeekInfo('week2')">Week 2</div>
-                    <div class="week" onclick="toggleWeekInfo('week3')">Week 3</div>
-                    <div class="week" onclick="toggleWeekInfo('week4')">Week 4</div>
-                    <div class="week" onclick="toggleWeekInfo('week5')">Week 5</div>
-                    <div class="week" onclick="toggleWeekInfo('week6')">Week 6</div>
-                    <div class="week" onclick="toggleWeekInfo('week7')">Week 7</div>
-                    <div class="week" onclick="toggleWeekInfo('week8')">Week 8</div>
-                    <div class="week" onclick="toggleWeekInfo('week9')">Week 9</div>
-                    <div class="week" onclick="toggleWeekInfo('week10')">Week 10</div>
-                    <div class="week" onclick="toggleWeekInfo('week11')">Week 11</div>
-                    <div class="week" onclick="toggleWeekInfo('week12')">Week 12</div>
-                    <div class="week" onclick="toggleWeekInfo('week13')">Week 13</div>
-                    <div class="week" onclick="toggleWeekInfo('week14')">Week 14</div>
-                    <div class="week" onclick="toggleWeekInfo('week15')">Week 15</div>
-                    <div class="week" onclick="toggleWeekInfo('week16')">Week 16</div>
-                    <div class="week" onclick="toggleWeekInfo('week17')">Week 17</div>
-                    <div class="week" onclick="toggleWeekInfo('week18')">Week 18</div>
-                </div>
-            </section>
-        </div>
-        <aside class="sidebar">
-            <div class="social-media">
-                <a href="https://twitter.com" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://facebook.com" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://instagram.com" target="_blank" title="Share on Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://tiktok.com" target="_blank" title="Share on TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://wa.me" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <div class="ad-container">
-                <!-- Placeholder for AdSense -->
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({
-                        google_ad_client: "ca-pub-xxxxxxxxxxxxxxxx",
-                        enable_page_level_ads: true
-                    });
-                </script>
-            </div>
-        </aside>
-    </main>
-    <footer>
-        <p>&copy; 2024 NFL Scores. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+        .share-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .share-buttons a {
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.2em;
+            color: #0000FF;
+            transition: color 0.3s ease;
+        }
+        .share-buttons a:hover {
+            color: #FF4500;
+        }
+    </style> 
+  <script>
+        function toggleResults(week) {
+            const resultsDiv = document.getElementById(week);
+            resultsDiv.classList.toggle('show');
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script> 
+ </head> 
+ <body> 
+  <header> 
+   <h1><a href="#">NFL Scores</a></h1> 
+   <div class="subtitle-small">
+    2024 Season
+   </div> 
+  </header> 
+  <div class="subtitle"> 
+   <p>Get the latest NFL results and scores for every game</p> 
+  </div> 
+  <div class="weeks-container"> 
+   <div class="week-box" onclick="toggleResults('week1-results')">
+    Week 1
+   </div> 
+   <div class="week-box">
+    Week 2
+   </div> 
+   <div class="week-box">
+    Week 3
+   </div> 
+   <div class="week-box">
+    Week 4
+   </div> 
+   <div class="week-box">
+    Week 5
+   </div> 
+   <div class="week-box">
+    Week 6
+   </div> 
+   <div class="week-box">
+    Week 7
+   </div> 
+   <div class="week-box">
+    Week 8
+   </div> 
+   <div class="week-box">
+    Week 9
+   </div> 
+   <div class="week-box">
+    Week 10
+   </div> 
+   <div class="week-box">
+    Week 11
+   </div> 
+   <div class="week-box">
+    Week 12
+   </div> 
+   <div class="week-box">
+    Week 13
+   </div> 
+   <div class="week-box">
+    Week 14
+   </div> 
+   <div class="week-box">
+    Week 15
+   </div> 
+   <div class="week-box">
+    Week 16
+   </div> 
+   <div class="week-box">
+    Week 17
+   </div> 
+   <div class="week-box">
+    Week 18
+   </div> 
+   <div class="week-box">
+    Playoffs
+   </div> 
+  </div> 
+  <div id="week1-results" class="hidden-results"> <!-- Resumen de los 14 juegos de la Week 1 --> 
+   <div class="game-summary"> 
+    <h3>Kansas City Chiefs 20, Detroit Lions 21</h3> 
+    <p>Patrick Mahomes passed for over 300 yards but couldn’t break through the Lions’ defense. Jared Goff led the Lions to a narrow victory, using key turnovers to seal the win.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>New Orleans Saints 47, Carolina Panthers 10</h3> 
+    <p>Derek Carr dominated with four touchdowns, while rookie Bryce Young struggled in his debut for the Panthers.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Houston Texans 29, Indianapolis Colts 27</h3> 
+    <p>C.J. Stroud led the Texans to a late victory with a last-minute field goal, outdueling Anthony Richardson in a close contest.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Baltimore Ravens 31, Pittsburgh Steelers 20</h3> 
+    <p>Lamar Jackson passed and rushed for touchdowns, overwhelming Kenny Pickett and the Steelers’ defense.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Chicago Bears 24, Tennessee Titans 17</h3> 
+    <p>Justin Fields made key plays in the fourth quarter to secure a Bears victory over Ryan Tannehill and the Titans.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Dallas Cowboys 33, Cleveland Browns 17</h3> 
+    <p>Dak Prescott threw for three touchdowns, while Deshaun Watson’s struggles with turnovers cost the Browns.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Los Angeles Chargers 22, Las Vegas Raiders 10</h3> 
+    <p>Justin Herbert’s solid performance and the Chargers' defensive effort kept Jimmy Garoppolo and the Raiders from mounting a comeback.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Philadelphia Eagles 30, New England Patriots 28</h3> 
+    <p>Jalen Hurts led the Eagles to a narrow win, while Mac Jones kept the Patriots in the game until the final drive.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Miami Dolphins 37, Denver Broncos 24</h3> 
+    <p>Tua Tagovailoa threw for over 400 yards as the Dolphins overwhelmed Russell Wilson and the Broncos’ defense.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Buffalo Bills 27, New York Jets 23</h3> 
+    <p>Josh Allen’s consistent play kept the Bills ahead, despite a strong comeback effort from Aaron Rodgers and the Jets.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>San Francisco 49ers 35, Arizona Cardinals 16</h3> 
+    <p>Brock Purdy led the 49ers to a convincing win over the Cardinals, with Kyler Murray struggling to keep pace.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Tampa Bay Buccaneers 21, Atlanta Falcons 18</h3> 
+    <p>Baker Mayfield’s efficient performance gave the Buccaneers the edge over Desmond Ridder and the Falcons in a close game.</p> 
+   </div> 
+   <div class="game-summary"> 
+    <h3>Green Bay Packers 28, Minnesota Vikings 24</h3> 
+    <p>Jordan Love led the Packers to </p>
+   </div>
+  </div>
+ 
+</body></html>
