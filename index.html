@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Scores 2024 - Latest Weekly NFL Results</title>
+    <meta name="description" content="Stay updated with the latest NFL scores for the 2024 season. This page provides weekly NFL results, including all regular-season games from Week 1 to Week 18 and the playoffs.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #003e7e;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 10px 0 0;
+        }
+
+        .header-image {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 70px; /* Adjusted size */
+            height: auto;
+        }
+
+        /* Navigation Line Styles */
+        .nav-line {
+            background-color: #004c8c;
+            height: 10px;
+        }
+
+        /* Main Content Styles */
+        main {
+            display: flex;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .content {
+            flex: 2;
+        }
+
+        .sidebar {
+            flex: 1.5; /* Increased flex value */
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .week-links {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* 6 columns */
+            gap: 10px;
+            max-width: calc(100% - 320px); /* Adjust for increased sidebar width */
+        }
+
+        .week-links .week {
+            background-color: #003e7e; /* Darker button color */
+            color: #ffffff;
+            padding: 10px; /* Reduced padding */
+            border: 2px solid #ffffff;
+            text-align: center;
+            height: 120px; /* Reduced height */
+            line-height: 40px;
+            font-size: 24px; /* Font size */
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px; /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            box-sizing: border-box; /* Include border in width calculation */
+        }
+
+        .week-links .week:hover {
+            background-color: #ff6600; /* Orange color on hover */
+            color: #ffffff;
+            transform: scale(1.05); /* Slightly enlarges button */
+        }
+
+        .week-info {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .week-info.active {
+            display: block;
+        }
+
+        .week-info p {
+            margin: 0 0 10px;
+        }
+
+        .week-info h3 {
+            margin-top: 0;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #003e7e;
+            color: #ffffff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Social Media Icons */
+        .social-media {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            color: #003e7e;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .social-media a:hover {
+            color: #ff6600;
+        }
+
+        /* AdSense */
+        .ad-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .ad-container iframe {
+            width: 100%;
+            height: auto;
+            max-width: 300px; /* Adjust based on ad size */
+            border: none;
+        }
+    </style>
+    <script>
+        function toggleWeekInfo(week) {
+            const info = document.querySelector(`.week-info[data-week="${week}"]`);
+            const allInfos = document.querySelectorAll('.week-info');
+            allInfos.forEach(info => info.classList.remove('active'));
+            info.classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="football-image.jpg" alt="Football Image" class="header-image">
+        <h1>NFL Scores 2024</h1>
+        <p>Stay updated with the latest NFL scores for the 2024 season. Check weekly results and keep track of your favorite teams' performance.</p>
+    </header>
+    <div class="nav-line"></div>
+    <main>
+        <div class="content">
+            <section id="home">
+                <h2>Welcome to NFL Scores 2024</h2>
+                <div id="weekly-scores" class="week-links">
+                    <!-- Week Buttons -->
+                    <div class="week" onclick="toggleWeekInfo('week1')">Week 1</div>
+                    <div class="week" onclick="toggleWeekInfo('week2')">Week 2</div>
+                    <div class="week" onclick="toggleWeekInfo('week3')">Week 3</div>
+                    <div class="week" onclick="toggleWeekInfo('week4')">Week 4</div>
+                    <div class="week" onclick="toggleWeekInfo('week5')">Week 5</div>
+                    <div class="week" onclick="toggleWeekInfo('week6')">Week 6</div>
+                    <div class="week" onclick="toggleWeekInfo('week7')">Week 7</div>
+                    <div class="week" onclick="toggleWeekInfo('week8')">Week 8</div>
+                    <div class="week" onclick="toggleWeekInfo('week9')">Week 9</div>
+                    <div class="week" onclick="toggleWeekInfo('week10')">Week 10</div>
+                    <div class="week" onclick="toggleWeekInfo('week11')">Week 11</div>
+                    <div class="week" onclick="toggleWeekInfo('week12')">Week 12</div>
+                    <div class="week" onclick="toggleWeekInfo('week13')">Week 13</div>
+                    <div class="week" onclick="toggleWeekInfo('week14')">Week 14</div>
+                    <div class="week" onclick="toggleWeekInfo('week15')">Week 15</div>
+                    <div class="week" onclick="toggleWeekInfo('week16')">Week 16</div>
+                    <div class="week" onclick="toggleWeekInfo('week17')">Week 17</div>
+                    <div class="week" onclick="toggleWeekInfo('week18')">Week 18</div>
+                </div>
+            </section>
+        </div>
+        <aside class="sidebar">
+            <div class="social-media">
+                <a href="https://twitter.com" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com" target="_blank" title="Share on Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Share on Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank" title="Share on TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me" target="_blank" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="ad-container">
+                <!-- Placeholder for AdSense -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                        google_ad_client: "ca-pub-xxxxxxxxxxxxxxxx",
+                        enable_page_level_ads: true
+                    });
+                </script>
+            </div>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2024 NFL Scores. All rights reserved.</p>
+    </footer>
+</body>
+</html>
